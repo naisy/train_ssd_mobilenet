@@ -19,23 +19,23 @@
 <a name='0'>
 
 ## Table of contents<br>
-* Create PascalVOC data from your JPG images.(#1)
-* Setting Tensorflow Object Detection API.(#2)
-* Create TF Record data from PascalVOC data.(#3)
-* Training.(#4)
-* Freeze Graph.(#5)
+* [Create PascalVOC data from your JPG images.](#1)
+* [Setting Tensorflow Object Detection API.](#2)
+* [Create TF Record data from PascalVOC data.](#3)
+* [Training.](#4)
+* [Freeze Graph.](#5)
 
 <hr>
 
 <a name='1'>
 
-## Create PascalVOC data from your JPG images.(#1-1)
-* Install [LabelImg](https://github.com/tzutalin/labelImg) on your Ubuntu desktop PC.
+## Create PascalVOC data from your JPG images.
+* [Install LabelImg on your Ubuntu desktop PC.](#1-1)
   * For Windows PC you can use VMware Player.
-* Make labels by hand.(#1-2)
-* Move files into dirs.(#1-3)
-* Make label_map.pbtxt.(#1-4)
-* Upload to traingin machine.(#1-5)
+* [Make labels by hand.](#1-2)
+* [Move files into dirs.](#1-3)
+* [Make label_map.pbtxt.](#1-4)
+* [Upload to traingin machine.](#1-5)
 
 <a name='1-1'>
 
@@ -121,11 +121,11 @@ scp -r ~/roadsign_data training_machine:~/github/train_ssd_mobilenet/
 <a name='2'>
 
 ## Setting Tensorflow Object Detection API.
-* git clone Tensorflow Object Detection API.(#2-1)
-* Edit exporter.py for Tensorflow r1.4.1.(#2-2)
-* Build protocol buffer.(#2-3)
-* Download checkpoint of ssd_mobilenet.(#2-4)
-* Make your pipeline config file.(#2-5)
+* [git clone Tensorflow Object Detection API.](#2-1)
+* [Edit exporter.py for Tensorflow r1.4.1.](#2-2)
+* [Build protocol buffer.](#2-3)
+* [Download checkpoint of ssd_mobilenet.](#2-4)
+* [Make your pipeline config file.](#2-5)
 
 <a name='2-1'>
 
