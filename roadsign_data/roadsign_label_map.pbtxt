@@ -1,0 +1,19 @@
+item {
+  id: 1
+  name: 'stop'
+}
+
+item {
+  id: 2
+  name: 'speed_10'
+}
+
+item {
+  id: 3
+  name: 'speed_20'
+}
+
+item {
+  id: 4
+  name: 'speed_30'
+}

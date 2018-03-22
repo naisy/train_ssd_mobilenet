@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPGImages</folder>
+	<filename>20171220_170443.jpg</filename>
+	<path>/home/guppy/Desktop/data/PascalVOC/train_data/JPGImages/20171220_170443.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4128</width>
+		<height>2322</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>stop</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1810</xmin>
+			<ymin>611</ymin>
+			<xmax>2346</xmax>
+			<ymax>1104</ymax>
+		</bndbox>
+	</object>
+</annotation>

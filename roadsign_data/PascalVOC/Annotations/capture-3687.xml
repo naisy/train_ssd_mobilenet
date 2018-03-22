@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>capture-3687.jpg</filename>
+	<path>/home/guppy/notebooks/github/RobotCarAI/level3_object_detection/roadsign_data/PascalVOC/JPEGImages/capture-3687.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>160</width>
+		<height>120</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>speed_10</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>133</xmin>
+			<ymin>35</ymin>
+			<xmax>157</xmax>
+			<ymax>56</ymax>
+		</bndbox>
+	</object>
+</annotation>

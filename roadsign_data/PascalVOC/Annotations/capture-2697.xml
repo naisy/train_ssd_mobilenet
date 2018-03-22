@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>capture-2697.jpg</filename>
+	<path>/home/guppy/notebooks/github/RobotCarAI/level3_object_detection/roadsign_data/PascalVOC/JPEGImages/capture-2697.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>160</width>
+		<height>120</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>speed_20</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1</xmin>
+			<ymin>50</ymin>
+			<xmax>22</xmax>
+			<ymax>71</ymax>
+		</bndbox>
+	</object>
+</annotation>

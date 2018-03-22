@@ -1,0 +1,26 @@
+<annotation>
+	<folder>prediction</folder>
+	<filename>capture-2126.jpg</filename>
+	<path>/home/guppy/Desktop/PascalVOC2/prediction/capture-2126.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>160</width>
+		<height>120</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>stop</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>88</xmin>
+			<ymin>44</ymin>
+			<xmax>109</xmax>
+			<ymax>64</ymax>
+		</bndbox>
+	</object>
+</annotation>

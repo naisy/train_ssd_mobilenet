@@ -1,0 +1,15 @@
+---
+label_map_file:     roadsign_data/roadsign_label_map.pbtxt # [Your data] label_map.pbtxt.
+
+# Your PascalVOC
+pascalvoc_dir:      roadsign_data/PascalVOC # [Your data] PascalVOC data dir.
+annotations_dir:    Annotations             # [Your data] xml dir. (Under pascalvoc_dir.)
+jpegimages_dir:     JPEGImages              # [Your data] image dir. (Under pascalvoc_dir.)
+imagesets_main_dir: ImageSets/Main          # [Automatically generated] trainval.txt dir. (Under pascalvoc_dir.)
+trainval_txt:       trainval.txt            # [Automatically generated] Don't change. trainval.txt. (Under imagesets_main_dir.)
+
+# Output
+tfrecord_dir:       roadsign_data/tfrecords # [Automatically generated] Output tfrecord data dir.
+train_record_file:  train.record            # [Automatically generated] train data under tfrecord_dir.
+val_record_file:    val.record              # [Automatically generated] validation data under tfrecord_dir.
+
