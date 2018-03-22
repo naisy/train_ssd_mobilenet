@@ -271,7 +271,8 @@ python ~/github/models/research/object_detection/train.py --logtostderr --train_
 # If you have output dir, please remove it first.
 rm -rf ./output/
 
-python ~/github/models/research/object_detection/export_inference_graph.py --input_type image_tensor --pipeline_config_path=./ssd_mobilenet_v1_roadsign_base_model.config --trained_checkpoint_prefix ./train/model.ckpt-11410 --output_directory ./output \
+# Please change to your checkpoint file.: ./train/model.ckpt-11410
+python ~/github/models/research/object_detection/export_inference_graph.py --input_type image_tensor --pipeline_config_path=./ssd_mobilenet_v1_roadsign.config --trained_checkpoint_prefix ./train/model.ckpt-11410 --output_directory ./output \
        --config_override " \
             model{ \
               ssd { \

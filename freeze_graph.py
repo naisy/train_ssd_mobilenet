@@ -5,7 +5,7 @@ import os
 import tensorflow as tf
 from tensorflow.python.framework import graph_util
 
-MODEL_DIR=os.path.abspath(os.path.dirname(__file__))+"/model"
+MODEL_DIR=os.path.abspath(os.path.dirname(__file__))+"/output"
 FROZEN_MODEL_NAME="frozen_inference_graph.pb"
 OUTPUT_NODE_NAMES="image_tensor,detection_boxes,detection_scores,detection_classes,num_detections"
 
