@@ -35,7 +35,7 @@
 * [Make labels by hand.](#1-2)
 * [Move files into dirs.](#1-3)
 * [Make label_map.pbtxt.](#1-4)
-* [Upload to traingin machine.](#1-5)
+* [Upload to training machine.](#1-5)
 
 <a name='1-1'>
 
@@ -108,7 +108,7 @@ item {
 
 <a name='1-5'>
 
-#### Upload to traingin machine.
+#### Upload to training machine.
 Copy the data to training machine.<br>
 Example:<br>
 ```
