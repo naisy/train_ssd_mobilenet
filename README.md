@@ -4,15 +4,28 @@
 <hr>
 
 ## My training machine<br>
-* AWS p3.2xlarge (Tesla V100)
-  * Ubuntu
-  * docker
+* AWS p3.2xlarge(Tesla V100 16GB 300W)
+  * Ubuntu 16.04
+  * docker-ce
   * nvidia-docker
     * nvidia/cuda
-    * Python 3.6.3
-    * OpenCV 3.3.1
-    * Tensorflow r1.4.1 (build from source)
+    * Python 3.6.3/OpenCV 3.3.1/Tensorflow r1.4.1 (build from source)
     * Tensorflow Object Detection API (branch r1.5)
+  * nvidia-docker
+    * nvidia/cuda:9.0-devel-ubuntu16.04
+    * Python 2.7.12/OpenCV 3.4.2/Tensorflow r1.8.0 (build from source)
+    * Tensorflow Object Detection API (branch master)
+
+* PC
+  * CPU: i7-8700 3.20GHz 6-core 12-threads
+  * GPU: NVIDIA GTX1060 6GB 120W
+  * MEMORY: 32GB
+  * Ubuntu 16.04
+  * docker-ce
+  * nvidia-docker
+    * nvidia/cuda:9.0-devel-ubuntu16.04
+    * Pyton 2.7.12/OpenCV 3.4.2/Tensorflow 1.8.0 (build from source)
+    * Tensorflow Object Detection API (branch master)
 
 <hr>
 
@@ -24,6 +37,7 @@
 * [Create TF Record data from PascalVOC data.](#3)
 * [Training.](#4)
 * [Freeze Graph.](#5)
+* [Run.](#6)
 
 <hr>
 
@@ -122,10 +136,11 @@ scp -r ~/roadsign_data training_machine:~/github/train_ssd_mobilenet/
 
 ## Setting Tensorflow Object Detection API.
 * [git clone Tensorflow Object Detection API.](#2-1)
-* [Edit exporter.py for Tensorflow r1.4.1.](#2-2)
+* [Edit exporter.py for Tensorflow r1.4.1. (for tensorflow/models branch r1.5)](#2-2)
 * [Build protocol buffer.](#2-3)
 * [Download checkpoint of ssd_mobilenet.](#2-4)
 * [Make your pipeline config file.](#2-5)
+* [Install pycocotools (for tensorflow/models branch master)](#2-6)
 
 <a name='2-1'>
 
@@ -138,10 +153,11 @@ cd models/
 git fetch
 git checkout r1.5
 ```
+You can use master branch, but it occasionally causes an error.<br>
 
 <a name='2-2'>
 
-#### Edit exporter.py for Tensorflow r1.4.1.
+#### Edit exporter.py for Tensorflow r1.4.1. (for tensorflow/models branch r1.5)
 If you want to run on r1.4.1, you need to fix this problem.<br>
 ValueError: Protocol message RewriterConfig has no "layout_optimizer" field.<br>
 [https://github.com/tensorflow/tensorflow/issues/16268](https://github.com/tensorflow/tensorflow/issues/16268)<br>
@@ -160,6 +176,27 @@ cd ~/github/models/research
 protoc object_detection/protos/*.proto --python_out=.
 ```
 
+For tensorflow/models master branch, protobuf version 3 is required.<br>
+If you get an error please install protobuf version 3 first.<br>
+[Install protobuf 3 on Ubuntu](https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8)<br>
+```
+# Make sure you grab the latest version
+curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip
+
+# Unzip
+unzip protoc-3.2.0-linux-x86_64.zip -d protoc3
+
+# Move protoc to /usr/local/bin/
+sudo mv protoc3/bin/* /usr/local/bin/
+
+# Move protoc3/include to /usr/local/include/
+sudo mv protoc3/include/* /usr/local/include/
+
+# Optional: change owner
+sudo chwon [user] /usr/local/bin/protoc
+sudo chwon -R [user] /usr/local/include/google
+```
+
 <a name='2-4'>
 
 #### Download checkpoint of ssd_mobilenet.
@@ -170,6 +207,7 @@ cd ~/github/train_ssd_mobilenet/
 wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2017_11_17.tar.gz
 tar xvf ssd_mobilenet_v1_coco_2017_11_17.tar.gz
 ```
+In tensorflow/models master branch, you can train new ssd models.<br>
 
 <a name='2-5'>
 
@@ -230,12 +268,25 @@ diff -u ~/github/models/research/object_detection/samples/configs/ssd_mobilenet_
    num_epochs: 1
 ```
 
+<a name='2-6'>
+
+#### Install pycocotools (for tensorflow/models branch master)
+```
+cd ~/github
+git clone https://github.com/pdollar/coco.git
+cd coco/PythonAPI
+make
+sudo make install
+sudo python setup.py install
+```
+
 [<PAGE TOP>](#top)　[<TOC>](#0)
 <hr>
 
 <a name='3'>
 
 ## Create TF Record data from PascalVOC data.
+Check [config.yml](./config.yml).<br>
 ```
 sudo pip install lxml pyyaml
 
@@ -252,6 +303,15 @@ python build2_tf_record.py
 <a name='4'>
 
 ## Training.
+* [tensorflow/models r1.5 branch.](#4-1)
+* [tensorflow/models master branch.](#4-2)
+
+<a name='4-1'>
+
+#### tensorflow/models r1.5 branch.
+`--train_dir`: output directory.<br>
+`--logtostderr`: log to stderror.<br>
+`--pipeline_config_path`: model config file.<br>
 ```
 cd ~/github/models/research/
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
@@ -259,6 +319,26 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 cd ~/github/train_ssd_mobilenet
 # training/continue from checkpoint
 python ~/github/models/research/object_detection/train.py --logtostderr --train_dir=./train --pipeline_config_path=./ssd_mobilenet_v1_roadsign.config
+```
+
+<a name='4-2'>
+
+#### tensorflow/models master branch.
+In tensorflow/models master branch, you can train with new ssd models.<br>
+In this case, I downloaded ssdlite_mobilenet_v2 and edit config like ssd_mobilenet_v1.<br>
+
+In master branch, local training command has changed.<br>
+[Running Locally](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md)<br>
+`--model_dir`: output directory.<br>
+`--alsologtostderr`: log to stderror.<br>
+`--pipeline_config_path`: model config file.<br>
+```
+cd ~/github/models/research/
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+cd ~/github/train_ssd_mobilenet
+# training/continue from checkpoint
+python ~/github/models/research/object_detection/model_main.py --alsologtostderr --model_dir=train --pipeline_config_path=./ssdlite_mobilenet_v2_roadsign.config
 ```
 
 [<PAGE TOP>](#top)　[<TOC>](#0)
@@ -291,3 +371,11 @@ ls -l ./output/
 ```
 
 [<PAGE TOP>](#top)　[<TOC>](#0)
+
+<a name='6'>
+
+## Run.
+freeze_graph.pb and roadsign_label_map.pbtxt are required for running.<br>
+You can use [Tensorflow realtime_object_detection](https://github.com/naisy/realtime_object_detection).<br>
+[![TX2](https://img.youtube.com/vi/554GqG21c8M/1.jpg)](https://www.youtube.com/watch?v=554GqG21c8M)<br>
+
