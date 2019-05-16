@@ -286,8 +286,11 @@ sudo python setup.py install
 <a name='3'>
 
 ## Configure the environment variables.
+```
 cd ~/github/models/
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/research/slim:`pwd`/research:
+```
+
 
 ## Create TF Record data from PascalVOC data.
 Check [config.yml](./config.yml).<br>
@@ -349,11 +352,14 @@ python ~/github/models/research/object_detection/model_main.py --alsologtostderr
 <a name='5'>
 
 ## Evaluating
+
+```
 cd ~/github/train_ssd_mobilenet
 python ~/github/models/research/object_detection/eval.py --logtostderr \
         --checkpoint_dir=./train \
         --eval_dir=eval \
         --pipeline_config_path=./ssd_mobilenet_v1_roadsign.config
+```
 
 ## Freeze Graph.
 ```
