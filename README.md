@@ -285,6 +285,13 @@ sudo python setup.py install
 
 <a name='3'>
 
+## Configure the environment variables.
+```
+cd ~/github/models/
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/research/slim:`pwd`/research:
+```
+
+
 ## Create TF Record data from PascalVOC data.
 Check [config.yml](./config.yml).<br>
 ```
@@ -313,8 +320,7 @@ python build2_tf_record.py
 `--logtostderr`: log to stderror.<br>
 `--pipeline_config_path`: model config file.<br>
 ```
-cd ~/github/models/research/
-export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
 
 cd ~/github/train_ssd_mobilenet
 # training/continue from checkpoint
@@ -333,8 +339,7 @@ In master branch, local training command has changed.<br>
 `--alsologtostderr`: log to stderror.<br>
 `--pipeline_config_path`: model config file.<br>
 ```
-cd ~/github/models/research/
-export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
 
 cd ~/github/train_ssd_mobilenet
 # training/continue from checkpoint
@@ -345,6 +350,16 @@ python ~/github/models/research/object_detection/model_main.py --alsologtostderr
 <hr>
 
 <a name='5'>
+
+## Evaluating
+
+```
+cd ~/github/train_ssd_mobilenet
+python ~/github/models/research/object_detection/eval.py --logtostderr \
+        --checkpoint_dir=./train \
+        --eval_dir=eval \
+        --pipeline_config_path=./ssd_mobilenet_v1_roadsign.config
+```
 
 ## Freeze Graph.
 ```
